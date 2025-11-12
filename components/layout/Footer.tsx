@@ -10,7 +10,6 @@ import { motion } from 'framer-motion';
 import { 
   FaFacebookF, 
   FaInstagram, 
-  FaTwitter, 
   FaLinkedinIn, 
   FaYoutube,
   FaPhone,
@@ -81,13 +80,13 @@ const Footer = () => {
     ]
   };
 
-  // Social media links
+  // Social media links - Twitter removed, links disabled until real URLs are provided
+  // Note: Currently non-clickable (disabled) - will enable when correct social media links are available
   const socialLinks = [
-    { icon: FaFacebookF, url: 'https://facebook.com/dpsystem', label: 'Facebook' },
-    { icon: FaInstagram, url: 'https://instagram.com/dpsystem', label: 'Instagram' },
-    { icon: FaTwitter, url: 'https://twitter.com/dpsystem', label: 'Twitter' },
-    { icon: FaLinkedinIn, url: 'https://linkedin.com/company/dpsystem', label: 'LinkedIn' },
-    { icon: FaYoutube, url: 'https://youtube.com/@dpsystem', label: 'YouTube' }
+    { icon: FaFacebookF, label: 'Facebook' },
+    { icon: FaInstagram, label: 'Instagram' },
+    { icon: FaLinkedinIn, label: 'LinkedIn' },
+    { icon: FaYoutube, label: 'YouTube' }
   ];
 
   return (
@@ -102,25 +101,25 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-2xl font-bold mb-4">D P Systems</h3>
-            <p className="text-accent-400 mb-6 leading-relaxed">
+            <h3 className="text-2xl font-bold mb-4 text-white">D P Systems</h3>
+            <p className="text-gray-300 mb-6 leading-relaxed">
               Your trusted IT hardware partner in Rajkot. Quality products, professional service, and after-sales support for over 20 years.
             </p>
-            {/* Social Media Links */}
+            {/* Social Media Links - Currently disabled until real URLs are provided */}
             <div className="flex space-x-3">
               {socialLinks.map((social, index) => {
                 const IconComponent = social.icon;
                 return (
-                  <a
+                  <motion.div
                     key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="w-10 h-10 bg-gray-800 hover:bg-primary rounded-lg flex items-center justify-center transition-colors duration-300"
+                    aria-label={`${social.label} (Coming Soon)`}
+                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center transition-all duration-300 cursor-not-allowed opacity-70 border-2 border-transparent hover:border-gray-600 hover:opacity-100"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    title={`${social.label} (Coming Soon)`}
                   >
-                    <IconComponent />
-                  </a>
+                    <IconComponent className="text-gray-400" />
+                  </motion.div>
                 );
               })}
             </div>
@@ -133,7 +132,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h4 className="text-lg font-bold mb-4">Quick Links</h4>
+            <h4 className="text-lg font-bold mb-4 text-white">Quick Links</h4>
             <ul className="space-y-2">
               {footerLinks.quickLinks.map((link, index) => (
                 <li key={index}>
@@ -155,7 +154,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h4 className="text-lg font-bold mb-4">Product Categories</h4>
+            <h4 className="text-lg font-bold mb-4 text-white">Product Categories</h4>
             <ul className="space-y-2">
               {footerLinks.productCategories.map((category, index) => (
                 <li key={index}>
@@ -177,7 +176,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h4 className="text-lg font-bold mb-4">Contact Info</h4>
+            <h4 className="text-lg font-bold mb-4 text-white">Contact Info</h4>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
                 <FaMapMarkerAlt className="text-primary mt-1 flex-shrink-0" />
@@ -237,13 +236,13 @@ const Footer = () => {
             {/* Legal Links */}
             <div className="flex space-x-6 text-sm">
               <Link 
-                href="/privacy" 
+                href="/privacy-policy" 
                 className="text-gray-400 hover:text-primary transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link 
-                href="/terms" 
+                href="/terms-conditions" 
                 className="text-gray-400 hover:text-primary transition-colors"
               >
                 Terms & Conditions

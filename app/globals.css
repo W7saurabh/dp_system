@@ -20,7 +20,8 @@
 
   body {
     @apply m-0 p-0 font-primary text-base text-gray-900 bg-white;
-    min-width: 320px;
+    min-width: 320px; /* Ensure support for smallest mobile screens */
+    overflow-x: hidden; /* Prevent horizontal scroll on mobile */
   }
 
   /* Headings */
@@ -52,9 +53,9 @@
     @apply text-base md:text-lg;
   }
 
-  /* Links */
+  /* Links - Faster transitions for snappier feel */
   a {
-    @apply text-primary hover:text-primary-600 transition-colors duration-300;
+    @apply text-primary hover:text-primary-600 transition-colors duration-200;
   }
 
   /* Paragraphs */
@@ -70,15 +71,22 @@
 
 /* Component Styles */
 @layer components {
-  /* Container */
+  /* Container - Enhanced mobile responsiveness */
   .container {
     @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
     max-width: 1280px;
   }
+  
+  /* Mobile-first responsive utilities */
+  @media (max-width: 640px) {
+    .container {
+      @apply px-3; /* Reduced padding on very small screens */
+    }
+  }
 
-  /* Button Variants */
+  /* Button Variants - Faster transitions for snappier interactions */
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all duration-200 cursor-pointer;
     min-height: 44px; /* Touch-friendly */
   }
 
@@ -98,9 +106,9 @@
     @apply border-2 border-gray-300 text-gray-700 hover:border-primary hover:text-primary;
   }
 
-  /* Card Styles */
+  /* Card Styles - Faster hover effects */
   .card {
-    @apply bg-white rounded-lg shadow-card hover:shadow-card-hover transition-all duration-300;
+    @apply bg-white rounded-lg shadow-card hover:shadow-card-hover transition-all duration-200;
   }
 
   .card-hover {
@@ -173,6 +181,45 @@
 
   .gradient-dark {
     background: linear-gradient(135deg, #000000 0%, #374151 100%);
+  }
+}
+
+/* Enhanced mobile responsiveness utilities */
+@layer utilities {
+  /* Prevent text overflow on mobile */
+  .text-wrap-balance {
+    text-wrap: balance;
+  }
+  
+  /* Touch-friendly tap targets */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Safe area insets for notched devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Prevent zoom on input focus (iOS) */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea {
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+  
+  /* Mobile-optimized grid gaps */
+  @media (max-width: 640px) {
+    .grid {
+      gap: 0.75rem; /* Slightly reduced gap on mobile */
+    }
   }
 }
 

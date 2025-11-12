@@ -98,7 +98,7 @@ const Header = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled 
           ? 'bg-white shadow-lg py-1 md:py-2' 
           : 'bg-white/95 backdrop-blur-md py-2 md:py-4'
@@ -113,7 +113,7 @@ const Header = () => {
             onClick={() => handleNavigation('home', '/')}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }} // Faster: 0.5 -> 0.3
           >
             <Image 
               src="/dpsystem-logo.png" 
@@ -147,7 +147,7 @@ const Header = () => {
                     layoutId="activeSection"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.2 }} // Faster: 0.3 -> 0.2
                   />
                 )}
               </button>
@@ -185,16 +185,17 @@ const Header = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 onClick={() => setIsMobileMenuOpen(false)}
               />
               
-              {/* Mobile Menu Panel */}
+              {/* Mobile Menu Panel - Enhanced with proper content display */}
               <motion.div
-                className="fixed top-0 right-0 h-full w-80 max-w-[80vw] bg-white shadow-2xl lg:hidden z-50 overflow-y-auto"
+                className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl lg:hidden z-50 overflow-y-auto"
                 initial={{ x: '100%' }}
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
-                transition={{ type: 'tween', duration: 0.3 }}
+                transition={{ type: 'tween', duration: 0.2 }}
               >
                 {/* Close button */}
                 <div className="flex justify-end p-4">
@@ -216,7 +217,7 @@ const Header = () => {
                     variants={{
                       visible: {
                         transition: {
-                          staggerChildren: 0.1
+                          staggerChildren: 0.06 // Faster: 0.1 -> 0.06
                         }
                       }
                     }}
@@ -245,7 +246,7 @@ const Header = () => {
                     className="mt-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.24 }} // Faster: 0.4 -> 0.24
                   >
                     <a 
                       href="tel:+919376509990" 

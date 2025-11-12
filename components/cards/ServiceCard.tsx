@@ -28,16 +28,16 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index = 0 }) => {
   const IconComponent = (Icons as any)[service.icon] || Icons.FaTools;
 
   return (
-    <Link href={`/services/${service.slug.current}`}>
-      <motion.div
+    // Navigation disabled until service detail pages are ready
+    <motion.div
         initial={{ opacity: 0, y: 50, scale: 0.9 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{
           type: 'spring',
-          damping: 20,
-          stiffness: 100,
-          delay: index * 0.1,
+          damping: 18,    // Slightly reduced for faster settle
+          stiffness: 140, // Increased for snappier animation
+          delay: index * 0.06, // Reduced from 0.1 for faster stagger
         }}
         whileHover={{ 
           y: -12,
@@ -136,32 +136,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index = 0 }) => {
           </motion.ul>
         )}
 
-        {/* Pricing section removed as per user requirement - cleaner UI focus on service details */}
-
-        {/* View Details Link with Animation */}
-        <motion.div 
-          className="flex items-center justify-between text-primary font-bold text-sm md:text-base group-hover:text-primary-600 transition-colors mt-auto"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.1 + 0.5 }}
-        >
-          <span>View Details</span>
-          <motion.div
-            initial={{ x: 0 }}
-            whileHover={{ x: 5 }}
-            transition={{ type: 'spring', stiffness: 400 }}
-          >
-            <FaArrowRight className="w-5 h-5" />
-          </motion.div>
-        </motion.div>
+        {/* Pricing and View Details removed - Detail pages coming soon */}
 
         {/* Hover Border Glow Effect */}
         <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
           <div className="absolute inset-0 rounded-2xl border-2 border-primary animate-pulse" />
         </div>
       </motion.div>
-    </Link>
   );
 };
 

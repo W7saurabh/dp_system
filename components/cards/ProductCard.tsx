@@ -31,16 +31,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0, imageUrl 
   const IconComponent = (Icons as any)[product.icon] || Icons.FaBox;
 
   return (
-    <Link href={`/products/${product.slug.current}`}>
-      <motion.div
+    // Navigation disabled until product detail pages are ready
+    <motion.div
         initial={{ opacity: 0, y: 50, scale: 0.95 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{
           type: 'spring',
-          damping: 20,
-          stiffness: 100,
-          delay: index * 0.1,
+          damping: 18,    // Slightly reduced for faster settle
+          stiffness: 140, // Increased for snappier animation
+          delay: index * 0.06, // Reduced from 0.1 for faster stagger
         }}
         whileHover={{ 
           y: -8,
@@ -65,9 +65,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0, imageUrl 
                 whileHover={{ scale: 1.08 }}
                 transition={{ 
                   type: "spring", 
-                  stiffness: 260, 
-                  damping: 20,
-                  duration: 0.6 
+                  stiffness: 300, // Increased for faster response
+                  damping: 18,    // Reduced for snappier feel
+                  duration: 0.36  // 40% faster: 0.6 -> 0.36
                 }}
                 className="relative w-full h-full"
               >
@@ -85,7 +85,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0, imageUrl 
                   className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/5 to-transparent"
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: 0.24 }} // 40% faster: 0.4 -> 0.24
                 />
                 
                 {/* Animated Shine Effect on Hover */}
@@ -93,7 +93,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0, imageUrl 
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                   initial={{ x: '-100%', opacity: 0 }}
                   whileHover={{ x: '100%', opacity: 1 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }} // Faster: 0.8 -> 0.5
                 />
               </motion.div>
               
@@ -103,14 +103,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0, imageUrl 
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 0 }}
                 whileHover={{ scale: 1, opacity: 100 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.2 }} // Faster: 0.3 -> 0.2
               />
               <motion.div
                 className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-primary opacity-0 group-hover:opacity-100"
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 0 }}
                 whileHover={{ scale: 1, opacity: 100 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.2 }} // Faster: 0.3 -> 0.2
               />
             </div>
           ) : (
@@ -219,28 +219,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0, imageUrl 
             </motion.div>
           )}
 
-          {/* View Details Button - Replaces Price Section */}
-          <motion.div 
-            className="pt-4 border-t border-gray-200 mt-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 + 0.6 }}
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-primary font-bold text-sm md:text-base group-hover:text-primary-600 transition-colors">
-                View Details
-              </span>
-              <motion.div
-                initial={{ x: 0 }}
-                whileHover={{ x: 5 }}
-                transition={{ type: 'spring', stiffness: 400 }}
-                className="flex items-center justify-center w-10 h-10 bg-primary-50 group-hover:bg-primary rounded-full transition-colors"
-              >
-                <FaArrowRight className="text-primary group-hover:text-white transition-colors" />
-              </motion.div>
-            </div>
-          </motion.div>
+          {/* View Details Button - REMOVED as per user request (detail pages coming soon) */}
+          {/* Price or availability info can be added here when detail pages are ready */}
         </div>
 
         {/* Hover Border Glow Effect */}
@@ -248,7 +228,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index = 0, imageUrl 
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 via-transparent to-primary/10" />
         </div>
       </motion.div>
-    </Link>
   );
 };
 
